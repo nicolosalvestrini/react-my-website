@@ -79,7 +79,7 @@ function App() {
       <WhyMe />
       <Testimonials testimonials={data.testimonials} />
       <ContactForm settings={data.settings} />
-      <Footer />
+      <Footer settings={data.settings} />
     </>
   );
 }

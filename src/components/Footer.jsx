@@ -1,3 +1,5 @@
+import LegalModals from './LegalModals';
+
 const NAV = [
   { href: '#home', label: 'Home' },
   { href: '#servizi', label: 'Servizi' },
@@ -7,7 +9,7 @@ const NAV = [
   { href: '#contatti', label: 'Contatti' },
 ];
 
-export default function Footer() {
+export default function Footer({ settings = {} }) {
   const year = new Date().getFullYear();
 
   return (
@@ -22,16 +24,42 @@ export default function Footer() {
           </p>
         </div>
 
-        <div>
-          <div className="muted" style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.05em', marginBottom: 10 }}>
-            NAVIGAZIONE
+        <div className="d-flex gap-5">
+          <div>
+            <div className="muted" style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.05em', marginBottom: 10 }}>
+              NAVIGAZIONE
+            </div>
+            <div className="d-flex flex-column gap-2">
+              {NAV.map((link) => (
+                <a key={link.href} href={link.href} style={{ fontSize: 14 }}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="d-flex flex-column gap-2">
-            {NAV.map((link) => (
-              <a key={link.href} href={link.href} style={{ fontSize: 14 }}>
-                {link.label}
-              </a>
-            ))}
+
+          <div>
+            <div className="muted" style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.05em', marginBottom: 10 }}>
+              LEGALE
+            </div>
+            <div className="d-flex flex-column gap-2">
+              <button
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#privacy-policy-modal"
+                style={{ fontSize: 14, background: 'none', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer', color: 'inherit' }}
+              >
+                Privacy Policy
+              </button>
+              <button
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#cookie-policy-modal"
+                style={{ fontSize: 14, background: 'none', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer', color: 'inherit' }}
+              >
+                Cookie Policy
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -39,6 +67,8 @@ export default function Footer() {
       <div className="container-narrow d-flex flex-column flex-md-row justify-content-between gap-2 mt-4 pt-4" style={{ borderTop: '1px solid var(--border)', fontSize: 13 }}>
         <span className="muted">© {year} NS Web Craft – Tutti i diritti riservati.</span>
       </div>
+
+      <LegalModals contactEmail={settings.contact_email} />
     </footer>
   );
 }
