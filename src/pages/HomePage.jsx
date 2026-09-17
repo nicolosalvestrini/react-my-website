@@ -7,14 +7,17 @@ import WhyMe from '../components/WhyMe';
 import Testimonials from '../components/Testimonials';
 import Icon from '../components/Icon';
 
+const HERO_TECH_PRIORITY = ['React', 'Laravel', 'Node.js', 'MySQL', 'JavaScript', 'PHP'];
+
 export default function HomePage() {
   const { data } = usePortfolioData();
-  const { settings, projects, services, testimonials } = data;
+  const { settings, projects, services, technologies, testimonials } = data;
   const aboutPreview = settings.about_text ? settings.about_text.split('\n').filter(Boolean)[0] : null;
+  const heroTechs = HERO_TECH_PRIORITY.map((name) => technologies.find((t) => t.name === name)).filter(Boolean);
 
   return (
     <>
-      <Hero settings={settings} />
+      <Hero settings={settings} technologies={heroTechs} />
 
       {aboutPreview && (
         <section className="section--tight">

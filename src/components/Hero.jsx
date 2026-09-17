@@ -1,14 +1,23 @@
 import { Link } from 'react-router-dom';
 import Icon from './Icon';
+import TechIcon from './TechIcon';
 import { API_URL } from '../api/client';
 
-export default function Hero({ settings }) {
+const CHIP_POSITIONS = [
+  { top: 24, left: 24 },
+  { top: 24, right: 24 },
+  { bottom: 96, left: 24 },
+  { top: '46%', right: 24 },
+];
+
+export default function Hero({ settings, technologies = [] }) {
   const title = settings.hero_title || 'Ciao, sono un Full Stack Web Developer.';
   const subtitle = settings.hero_subtitle || 'Realizzo siti web e applicazioni su misura.';
   const availability = settings.availability_status;
   const githubUrl = settings.github_url;
   const cvPath = settings.cv_file_path;
   const cvUrl = cvPath ? (cvPath.startsWith('http') ? cvPath : `${API_URL}/storage/${cvPath}`) : null;
+  const floatingTechs = technologies.slice(0, 4);
 
   return (
     <section className="section" style={{ paddingTop: 56 }}>
@@ -69,7 +78,31 @@ export default function Hero({ settings }) {
                   background: 'radial-gradient(circle at 30% 20%, rgba(40,112,255,0.25), transparent 55%), radial-gradient(circle at 80% 80%, rgba(171,138,255,0.25), transparent 55%)',
                 }}
               />
-              <span style={{ fontSize: 96, fontWeight: 800, color: 'rgba(242,244,255,0.14)', position: 'relative' }}>NS</span>
+              <span style={{ fontSize: 96, fontWeight: 800, color: 'rgba(242,244,255,0.1)', position: 'relative' }}>NS</span>
+
+              {floatingTechs.map((tech, index) => (
+                <span
+                  key={tech.id}
+                  style={{
+                    position: 'absolute',
+                    ...CHIP_POSITIONS[index],
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '9px 14px',
+                    borderRadius: 12,
+                    background: 'var(--panel)',
+                    border: '1px solid var(--border)',
+                    boxShadow: '0 14px 26px -10px rgba(0,0,0,0.55)',
+                    fontSize: 13,
+                    fontWeight: 600,
+                  }}
+                >
+                  <TechIcon name={tech.name} size={17} />
+                  {tech.name}
+                </span>
+              ))}
+
               <span
                 className="icon-box icon-box--purple"
                 style={{
