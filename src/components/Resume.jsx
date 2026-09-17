@@ -20,7 +20,7 @@ export default function Resume({ experiences, settings }) {
   const cvUpdatedAt = settings.cv_updated_at;
 
   return (
-    <section id="curriculum" className="section" style={{ background: 'var(--panel)' }}>
+    <section className="section" style={{ background: 'var(--panel)' }}>
       <div className="container-narrow">
         <div className="eyebrow">Curriculum</div>
         <h2 className="section-title">Il mio percorso</h2>

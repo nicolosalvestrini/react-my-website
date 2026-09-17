@@ -5,7 +5,7 @@ export default function About({ settings }) {
   if (!text) return null;
 
   return (
-    <section id="chi-sono" className="section--tight">
+    <section className="section">
       <div className="container-narrow">
         <div className="card d-flex flex-column flex-md-row gap-4 p-4 p-md-5">
           <div className="icon-box icon-box--purple" style={{ width: 56, height: 56, borderRadius: 16 }}>

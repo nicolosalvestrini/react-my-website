@@ -1,12 +1,13 @@
+import { Link } from 'react-router-dom';
 import LegalModals from './LegalModals';
 
 const NAV = [
-  { href: '#home', label: 'Home' },
-  { href: '#servizi', label: 'Servizi' },
-  { href: '#chi-sono', label: 'Chi sono' },
-  { href: '#curriculum', label: 'Curriculum' },
-  { href: '#progetti', label: 'Progetti' },
-  { href: '#contatti', label: 'Contatti' },
+  { to: '/', label: 'Home' },
+  { to: '/servizi', label: 'Servizi' },
+  { to: '/chi-sono', label: 'Chi sono' },
+  { to: '/curriculum', label: 'Curriculum' },
+  { to: '/progetti', label: 'Progetti' },
+  { to: '/contatti', label: 'Contatti' },
 ];
 
 export default function Footer({ settings = {} }) {
@@ -31,9 +32,9 @@ export default function Footer({ settings = {} }) {
             </div>
             <div className="d-flex flex-column gap-2">
               {NAV.map((link) => (
-                <a key={link.href} href={link.href} style={{ fontSize: 14 }}>
+                <Link key={link.to} to={link.to} style={{ fontSize: 14 }}>
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

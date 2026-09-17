@@ -40,7 +40,7 @@ export default function ContactForm({ settings }) {
   };
 
   return (
-    <section id="contatti" className="section">
+    <section className="section">
       <div className="container-narrow">
         <div className="eyebrow">Contatti</div>
         <h2 className="section-title mb-4">Hai un progetto o un'opportunità per me?</h2>

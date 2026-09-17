@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const LINKS = [
-  { href: '#home', label: 'Home' },
-  { href: '#chi-sono', label: 'Chi sono' },
-  { href: '#progetti', label: 'Progetti' },
-  { href: '#servizi', label: 'Servizi' },
-  { href: '#competenze', label: 'Competenze' },
-  { href: '#curriculum', label: 'Curriculum' },
-  { href: '#contatti', label: 'Contatti' },
+  { to: '/', label: 'Home' },
+  { to: '/chi-sono', label: 'Chi sono' },
+  { to: '/progetti', label: 'Progetti' },
+  { to: '/servizi', label: 'Servizi' },
+  { to: '/competenze', label: 'Competenze' },
+  { to: '/curriculum', label: 'Curriculum' },
+  { to: '/contatti', label: 'Contatti' },
 ];
 
 export default function Navbar() {
@@ -22,6 +23,12 @@ export default function Navbar() {
 
   const handleNavClick = () => setOpen(false);
 
+  const linkStyle = ({ isActive }) => ({
+    fontSize: 15,
+    color: isActive ? 'var(--text)' : 'var(--muted)',
+    fontWeight: isActive ? 700 : 500,
+  });
+
   return (
     <header
       style={{
@@ -34,28 +41,22 @@ export default function Navbar() {
       }}
     >
       <div className="container-narrow d-flex align-items-center justify-content-between" style={{ height: 76 }}>
-        <a href="#home" className="d-flex align-items-center gap-2" style={{ fontWeight: 800, fontSize: 20 }}>
+        <Link to="/" className="d-flex align-items-center gap-2" style={{ fontWeight: 800, fontSize: 20 }}>
           <span style={{ color: 'var(--blue)' }}>NS</span>
           <span>Web Craft</span>
-        </a>
+        </Link>
 
         <nav className="d-none d-lg-flex align-items-center gap-4">
           {LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              style={{ fontSize: 15, color: 'var(--muted)', fontWeight: 500 }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
-            >
+            <NavLink key={link.to} to={link.to} style={linkStyle}>
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
-        <a href="#contatti" className="btn-brand btn-primary d-none d-lg-inline-flex">
+        <Link to="/contatti" className="btn-brand btn-primary d-none d-lg-inline-flex">
           Parliamo del tuo progetto
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -75,13 +76,13 @@ export default function Navbar() {
         <nav className="d-lg-none" style={{ borderTop: '1px solid var(--border)', background: 'var(--panel)' }}>
           <div className="container-narrow d-flex flex-column py-3 gap-3">
             {LINKS.map((link) => (
-              <a key={link.href} href={link.href} onClick={handleNavClick} style={{ fontSize: 16, padding: '4px 0' }}>
+              <NavLink key={link.to} to={link.to} onClick={handleNavClick} style={linkStyle}>
                 {link.label}
-              </a>
+              </NavLink>
             ))}
-            <a href="#contatti" onClick={handleNavClick} className="btn-brand btn-primary justify-content-center">
+            <Link to="/contatti" onClick={handleNavClick} className="btn-brand btn-primary justify-content-center">
               Parliamo del tuo progetto
-            </a>
+            </Link>
           </div>
         </nav>
       )}

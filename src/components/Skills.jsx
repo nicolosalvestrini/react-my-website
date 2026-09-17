@@ -22,7 +22,7 @@ export default function Skills({ technologies }) {
   if (visibleGroups.length === 0) return null;
 
   return (
-    <section id="competenze" className="section">
+    <section className="section">
       <div className="container-narrow">
         <div className="eyebrow">Competenze</div>
         <h2 className="section-title">Gli strumenti che uso ogni giorno</h2>

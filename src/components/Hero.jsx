@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Icon from './Icon';
 import { API_URL } from '../api/client';
 
@@ -10,7 +11,7 @@ export default function Hero({ settings }) {
   const cvUrl = cvPath ? (cvPath.startsWith('http') ? cvPath : `${API_URL}/storage/${cvPath}`) : null;
 
   return (
-    <section id="home" className="section" style={{ paddingTop: 56 }}>
+    <section className="section" style={{ paddingTop: 56 }}>
       <div className="container-narrow">
         <div className="row align-items-center g-5">
           <div className="col-lg-6">
@@ -18,10 +19,10 @@ export default function Hero({ settings }) {
             <p style={{ marginTop: 22, fontSize: 18, maxWidth: 520 }}>{subtitle}</p>
 
             <div className="d-flex flex-wrap gap-3 mt-4">
-              <a href="#progetti" className="btn-brand btn-primary">
+              <Link to="/progetti" className="btn-brand btn-primary">
                 Scopri i miei progetti
                 <Icon name="arrow" size={18} />
-              </a>
+              </Link>
               {cvUrl && (
                 <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="btn-brand btn-outline">
                   Scarica il CV

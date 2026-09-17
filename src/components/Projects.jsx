@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from './Icon';
 
 const CATEGORY_LABELS = {
@@ -8,7 +9,7 @@ const CATEGORY_LABELS = {
   database: 'Database',
 };
 
-export default function Projects({ projects }) {
+export default function Projects({ projects, teaser = false, limit, viewAllHref }) {
   const [filter, setFilter] = useState('tutti');
 
   const categories = useMemo(() => {
@@ -16,10 +17,13 @@ export default function Projects({ projects }) {
     return ['tutti', ...Object.keys(CATEGORY_LABELS).filter((c) => present.has(c))];
   }, [projects]);
 
-  const filtered = filter === 'tutti' ? projects : projects.filter((p) => p.category === filter);
+  let list = teaser ? projects.filter((p) => p.is_featured) : projects;
+  if (teaser && list.length === 0) list = projects;
+  if (!teaser) list = filter === 'tutti' ? projects : projects.filter((p) => p.category === filter);
+  if (limit) list = list.slice(0, limit);
 
   return (
-    <section id="progetti" className="section">
+    <section className="section">
       <div className="container-narrow">
         <div className="d-flex flex-wrap align-items-end justify-content-between gap-4 mb-4">
           <div>
@@ -27,32 +31,34 @@ export default function Projects({ projects }) {
             <h2 className="section-title">Cosa ho costruito finora</h2>
           </div>
 
-          <div className="d-flex gap-2 flex-wrap">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setFilter(cat)}
-                className="btn-brand"
-                style={{
-                  padding: '9px 16px',
-                  fontSize: 14,
-                  background: filter === cat ? 'var(--blue)' : 'var(--panel)',
-                  color: filter === cat ? '#fff' : 'var(--muted)',
-                  border: `1px solid ${filter === cat ? 'var(--blue)' : 'var(--border)'}`,
-                }}
-              >
-                {cat === 'tutti' ? 'Tutti' : CATEGORY_LABELS[cat]}
-              </button>
-            ))}
-          </div>
+          {!teaser && (
+            <div className="d-flex gap-2 flex-wrap">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setFilter(cat)}
+                  className="btn-brand"
+                  style={{
+                    padding: '9px 16px',
+                    fontSize: 14,
+                    background: filter === cat ? 'var(--blue)' : 'var(--panel)',
+                    color: filter === cat ? '#fff' : 'var(--muted)',
+                    border: `1px solid ${filter === cat ? 'var(--blue)' : 'var(--border)'}`,
+                  }}
+                >
+                  {cat === 'tutti' ? 'Tutti' : CATEGORY_LABELS[cat]}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        {filtered.length === 0 ? (
+        {list.length === 0 ? (
           <p>Nessun progetto in questa categoria, per ora.</p>
         ) : (
           <div className="row g-4">
-            {filtered.map((project) => (
+            {list.map((project) => (
               <div key={project.id} className="col-md-6 col-lg-4">
                 <article className="card hover-lift h-100 d-flex flex-column overflow-hidden">
                   <div
@@ -99,6 +105,15 @@ export default function Projects({ projects }) {
                 </article>
               </div>
             ))}
+          </div>
+        )}
+
+        {teaser && viewAllHref && (
+          <div className="text-center mt-5">
+            <Link to={viewAllHref} className="btn-brand btn-outline">
+              Vedi tutti i progetti
+              <Icon name="arrow" size={16} />
+            </Link>
           </div>
         )}
       </div>
