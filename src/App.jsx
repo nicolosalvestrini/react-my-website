@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 import ServicesPage from './pages/ServicesPage';
 import SkillsPage from './pages/SkillsPage';
 import ResumePage from './pages/ResumePage';
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/chi-sono" element={<AboutPage />} />
             <Route path="/progetti" element={<ProjectsPage />} />
+            <Route path="/progetti/:slug" element={<ProjectDetailPage />} />
             <Route path="/servizi" element={<ServicesPage />} />
             <Route path="/competenze" element={<SkillsPage />} />
             <Route path="/curriculum" element={<ResumePage />} />

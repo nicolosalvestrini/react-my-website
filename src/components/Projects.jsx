@@ -111,7 +111,9 @@ export default function Projects({ projects, teaser = false, limit, viewAllHref 
                       </span>
                     </div>
                     <div className="p-4 d-flex flex-column flex-grow-1">
-                      <h3 style={{ fontSize: 19, marginBottom: 8 }}>{project.title}</h3>
+                      <h3 style={{ fontSize: 19, marginBottom: 8 }}>
+                        <Link to={`/progetti/${project.slug}`} className="stretched-link">{project.title}</Link>
+                      </h3>
                       <p className="clamp-4" style={{ fontSize: 14.5 }}>{project.description}</p>
                       <div className="d-flex flex-wrap gap-2 mt-auto pt-3 mb-3">
                         {project.technologies.map((tech) => (
@@ -121,7 +123,11 @@ export default function Projects({ projects, teaser = false, limit, viewAllHref 
                           </span>
                         ))}
                       </div>
-                      <div className="d-flex gap-3">
+                      <div className="d-flex flex-wrap align-items-center gap-3" style={{ position: 'relative', zIndex: 2 }}>
+                        <Link to={`/progetti/${project.slug}`} className="btn-brand btn-primary" style={{ padding: '8px 14px', fontSize: 13.5 }}>
+                          Dettagli
+                          <Icon name="arrow" size={15} />
+                        </Link>
                         {project.demo_url && (
                           <a href={project.demo_url} target="_blank" rel="noopener noreferrer" className="btn-brand btn-outline" style={{ padding: '8px 14px', fontSize: 13.5 }}>
                             Demo live

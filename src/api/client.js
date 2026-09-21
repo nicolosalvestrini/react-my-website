@@ -3,7 +3,9 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 async function get(path) {
   const res = await fetch(`${API_URL}${path}`);
   if (!res.ok) {
-    throw new Error(`Errore durante il caricamento di ${path}`);
+    const error = new Error(`Errore durante il caricamento di ${path}`);
+    error.status = res.status;
+    throw error;
   }
   return res.json();
 }
@@ -16,6 +18,10 @@ function toQuery(params) {
 
 export function getProjects(params = {}) {
   return get(`/api/projects${toQuery(params)}`);
+}
+
+export function getProject(slug) {
+  return get(`/api/projects/${encodeURIComponent(slug)}`);
 }
 
 export function getServices() {
