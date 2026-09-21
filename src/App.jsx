@@ -9,6 +9,7 @@ import ServicesPage from './pages/ServicesPage';
 import SkillsPage from './pages/SkillsPage';
 import ResumePage from './pages/ResumePage';
 import ContactPage from './pages/ContactPage';
+import TestimonialsPage from './pages/TestimonialsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/servizi" element={<ServicesPage />} />
             <Route path="/competenze" element={<SkillsPage />} />
             <Route path="/curriculum" element={<ResumePage />} />
+            <Route path="/testimonianze" element={<TestimonialsPage />} />
             <Route path="/contatti" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

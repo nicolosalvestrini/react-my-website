@@ -44,7 +44,7 @@ export default function HomePage() {
       <Projects projects={projects} teaser limit={3} viewAllHref="/progetti" />
       <Services services={services} limit={3} viewAllHref="/servizi" />
       <WhyMe />
-      <Testimonials testimonials={testimonials} />
+      <Testimonials testimonials={testimonials} showCta />
 
       <section className="section--tight">
         <div className="container-narrow">

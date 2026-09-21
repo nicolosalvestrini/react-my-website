@@ -60,3 +60,25 @@ export async function submitContactForm(payload) {
 }
 
 export { API_URL };
+
+export async function submitTestimonial(payload) {
+  const res = await fetch(`${API_URL}/api/testimonials`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  const json = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    const error = new Error(
+      res.status === 429
+        ? 'Hai inviato troppe richieste, riprova tra qualche minuto.'
+        : json.message || "Errore durante l'invio della testimonianza."
+    );
+    error.errors = json.errors;
+    throw error;
+  }
+
+  return json;
+}

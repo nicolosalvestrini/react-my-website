@@ -21,7 +21,7 @@ const PATHS = {
   quote: 'M7 7h4v6H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2zM15 7h4v6h-4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z',
 };
 
-export default function Icon({ name, size = 20, className = '', strokeWidth = 1.8 }) {
+export default function Icon({ name, size = 20, className = '', strokeWidth = 1.8, style }) {
   const value = PATHS[name] || PATHS.code;
   const subPaths = value.split('|');
 
@@ -36,6 +36,7 @@ export default function Icon({ name, size = 20, className = '', strokeWidth = 1.
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      style={style}
       aria-hidden="true"
     >
       {subPaths.map((d, index) => (

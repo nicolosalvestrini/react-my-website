@@ -6,6 +6,7 @@ const NAV = [
   { to: '/servizi', label: 'Servizi' },
   { to: '/chi-sono', label: 'Chi sono' },
   { to: '/curriculum', label: 'Curriculum' },
+  { to: '/testimonianze', label: 'Testimonianze' },
   { to: '/progetti', label: 'Progetti' },
   { to: '/contatti', label: 'Contatti' },
 ];

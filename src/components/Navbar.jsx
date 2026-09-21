@@ -8,6 +8,7 @@ const LINKS = [
   { to: '/servizi', label: 'Servizi' },
   { to: '/competenze', label: 'Competenze' },
   { to: '/curriculum', label: 'Curriculum' },
+  { to: '/testimonianze', label: 'Testimonianze' },
   { to: '/contatti', label: 'Contatti' },
 ];
 
@@ -41,12 +42,12 @@ export default function Navbar() {
       }}
     >
       <div className="container-narrow d-flex align-items-center justify-content-between" style={{ height: 76 }}>
-        <Link to="/" className="d-flex align-items-center gap-2" style={{ fontWeight: 800, fontSize: 20 }}>
+        <Link to="/" className="d-flex align-items-center gap-2" style={{ fontWeight: 800, fontSize: 20, whiteSpace: "nowrap" }}>
           <span style={{ color: 'var(--blue)' }}>NS</span>
           <span>Web Craft</span>
         </Link>
 
-        <nav className="d-none d-lg-flex align-items-center gap-4">
+        <nav className="d-none d-xl-flex align-items-center gap-4">
           {LINKS.map((link) => (
             <NavLink key={link.to} to={link.to} style={linkStyle}>
               {link.label}
@@ -54,13 +55,13 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link to="/contatti" className="btn-brand btn-primary d-none d-lg-inline-flex">
+        <Link to="/contatti" className="btn-brand btn-primary d-none d-xl-inline-flex">
           Parliamo del tuo progetto
         </Link>
 
         <button
           type="button"
-          className="btn-brand btn-outline d-lg-none"
+          className="btn-brand btn-outline d-xl-none"
           style={{ padding: '8px 12px' }}
           aria-label="Apri il menu"
           aria-expanded={open}
@@ -73,7 +74,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <nav className="d-lg-none" style={{ borderTop: '1px solid var(--border)', background: 'var(--panel)' }}>
+        <nav className="d-xl-none" style={{ borderTop: '1px solid var(--border)', background: 'var(--panel)' }}>
           <div className="container-narrow d-flex flex-column py-3 gap-3">
             {LINKS.map((link) => (
               <NavLink key={link.to} to={link.to} onClick={handleNavClick} style={linkStyle}>
