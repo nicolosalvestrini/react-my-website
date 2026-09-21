@@ -25,3 +25,8 @@ dist-ssr
 
 # Local tooling
 /.claude
+
+# Environment
+.env
+.env.local
+.env.*.local
