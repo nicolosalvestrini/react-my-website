@@ -19,7 +19,7 @@ function Modal({ id, title, children }) {
 }
 
 export default function LegalModals({ contactEmail }) {
-  const email = contactEmail || 'info@nswebcraft.it';
+  const email = contactEmail || 'nicolo.salvestrini@gmail.com';
 
   return (
     <>

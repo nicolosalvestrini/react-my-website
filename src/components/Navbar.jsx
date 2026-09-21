@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Logo from './Logo';
 
 const LINKS = [
   { to: '/', label: 'Home' },
@@ -26,6 +27,7 @@ export default function Navbar() {
 
   const linkStyle = ({ isActive }) => ({
     fontSize: 15,
+    whiteSpace: 'nowrap',
     color: isActive ? 'var(--text)' : 'var(--muted)',
     fontWeight: isActive ? 700 : 500,
   });
@@ -42,9 +44,8 @@ export default function Navbar() {
       }}
     >
       <div className="container-narrow d-flex align-items-center justify-content-between" style={{ height: 76 }}>
-        <Link to="/" className="d-flex align-items-center gap-2" style={{ fontWeight: 800, fontSize: 20, whiteSpace: "nowrap" }}>
-          <span style={{ color: 'var(--blue)' }}>NS</span>
-          <span>Web Craft</span>
+        <Link to="/" aria-label="Nicolò Salvestrini - Home">
+          <Logo />
         </Link>
 
         <nav className="d-none d-xl-flex align-items-center gap-4">
@@ -56,7 +57,7 @@ export default function Navbar() {
         </nav>
 
         <Link to="/contatti" className="btn-brand btn-primary d-none d-xl-inline-flex">
-          Parliamo del tuo progetto
+          Contattami
         </Link>
 
         <button
@@ -82,7 +83,7 @@ export default function Navbar() {
               </NavLink>
             ))}
             <Link to="/contatti" onClick={handleNavClick} className="btn-brand btn-primary justify-content-center">
-              Parliamo del tuo progetto
+              Contattami
             </Link>
           </div>
         </nav>

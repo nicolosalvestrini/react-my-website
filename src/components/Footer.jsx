@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import LegalModals from './LegalModals';
+import Logo from './Logo';
 
 const NAV = [
   { to: '/', label: 'Home' },
@@ -18,9 +19,7 @@ export default function Footer({ settings = {} }) {
     <footer style={{ borderTop: '1px solid var(--border)', padding: '48px 0 28px' }}>
       <div className="container-narrow d-flex flex-column flex-md-row justify-content-between gap-4">
         <div>
-          <div style={{ fontWeight: 800, fontSize: 18 }}>
-            <span style={{ color: 'var(--blue)' }}>NS</span> Web Craft
-          </div>
+          <Logo fontSize={18} />
           <p style={{ fontSize: 13.5, maxWidth: 280, marginTop: 8 }}>
             Sviluppo web moderno e soluzioni digitali su misura per il tuo business.
           </p>
@@ -67,7 +66,7 @@ export default function Footer({ settings = {} }) {
       </div>
 
       <div className="container-narrow d-flex flex-column flex-md-row justify-content-between gap-2 mt-4 pt-4" style={{ borderTop: '1px solid var(--border)', fontSize: 13 }}>
-        <span className="muted">© {year} NS Web Craft – Tutti i diritti riservati.</span>
+        <span className="muted">© {year} Nicolò Salvestrini – Tutti i diritti riservati.</span>
       </div>
 
       <LegalModals contactEmail={settings.contact_email} />
