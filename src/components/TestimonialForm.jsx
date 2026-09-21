@@ -31,15 +31,12 @@ export default function TestimonialForm() {
   };
 
   return (
-    <section className="section">
-      <div className="container-narrow" style={{ maxWidth: 760 }}>
-        <div className="eyebrow">Lascia una testimonianza</div>
-        <h2 className="section-title">Hai lavorato con me?</h2>
-        <p className="section-subtitle" style={{ marginBottom: 32 }}>
-          Racconta la tua esperienza: la testimonianza verrà pubblicata dopo una rapida verifica.
+    <div className="mb-4">
+      <form className="card p-4" onSubmit={handleSubmit}>
+        <h3 style={{ fontSize: 20, marginBottom: 4 }}>Racconta la tua esperienza</h3>
+        <p className="muted mb-3" style={{ fontSize: 14 }}>
+          La testimonianza verrà pubblicata dopo una rapida verifica.
         </p>
-
-        <form className="card p-4" onSubmit={handleSubmit}>
           <div className="row g-3">
             <div className="col-md-6">
               <input
@@ -114,8 +111,7 @@ export default function TestimonialForm() {
             <Icon name="arrow" size={16} />
           </button>
         </form>
-      </div>
-    </section>
+    </div>
   );
 }
 

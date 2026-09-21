@@ -1,12 +1,84 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from './Icon';
+import Stars from './Stars';
+import TestimonialForm from './TestimonialForm';
 
-export default function Testimonials({ testimonials, showCta = false }) {
+function summarize(testimonials) {
+  const rated = testimonials.filter((t) => t.rating > 0);
+  const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+  rated.forEach((t) => { counts[t.rating] += 1; });
+  const average = rated.length ? rated.reduce((sum, t) => sum + t.rating, 0) / rated.length : 0;
+  return { average, counts, total: rated.length };
+}
+
+export default function Testimonials({ testimonials, showCta = false, withForm = false }) {
+  const [formOpen, setFormOpen] = useState(false);
+  const { average, counts, total } = summarize(testimonials);
+  const averageLabel = average.toFixed(1).replace('.', ',');
+
   return (
     <section className="section" style={{ background: 'var(--panel)' }}>
       <div className="container-narrow">
         <div className="eyebrow">Cosa dicono di me</div>
         <h2 className="section-title mb-4">Testimonianze</h2>
+
+        <div className="card p-4 p-md-5 mb-4">
+          <div className="row g-4 align-items-center">
+            <div className="col-md-4 text-center">
+              <div style={{ fontSize: 56, fontWeight: 800, lineHeight: 1, color: 'var(--text)' }}>
+                {total ? averageLabel : '–'}
+              </div>
+              <div className="mt-2 mb-1">
+                <Stars value={average} size={22} />
+              </div>
+              <div className="muted" style={{ fontSize: 14 }}>
+                {total === 0 ? 'Nessuna valutazione' : total === 1 ? '1 valutazione' : `${total} valutazioni`}
+              </div>
+            </div>
+
+            <div className="col-md-5">
+              {[5, 4, 3, 2, 1].map((star) => (
+                <div key={star} className="d-flex align-items-center gap-2 mb-1" style={{ fontSize: 13 }}>
+                  <span className="muted" style={{ width: 10, textAlign: 'right' }}>{star}</span>
+                  <div style={{ flex: 1, height: 8, borderRadius: 4, background: 'var(--border)', overflow: 'hidden' }}>
+                    <div
+                      style={{
+                        width: total ? `${(counts[star] / total) * 100}%` : 0,
+                        height: '100%',
+                        background: '#f5b301',
+                        borderRadius: 4,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="col-md-3 text-md-end text-center">
+              {withForm ? (
+                <button
+                  type="button"
+                  className="btn-brand btn-primary"
+                  onClick={() => setFormOpen((open) => !open)}
+                  aria-expanded={formOpen}
+                >
+                  <Icon name="star" size={16} />
+                  {formOpen ? 'Chiudi' : 'Scrivi una testimonianza'}
+                </button>
+              ) : (
+                showCta && (
+                  <Link to="/testimonianze" className="btn-brand btn-primary">
+                    <Icon name="star" size={16} />
+                    Scrivi una testimonianza
+                  </Link>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+
+        {withForm && formOpen && <TestimonialForm />}
 
         {testimonials.length === 0 ? (
           <div
@@ -23,16 +95,7 @@ export default function Testimonials({ testimonials, showCta = false }) {
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} className="col-md-6 col-lg-4">
                 <div className="card h-100 p-4">
-                  <Icon name="quote" size={22} className="mb-3" style={{ color: 'var(--purple)' }} />
-                  {testimonial.rating > 0 && (
-                    <div className="d-flex gap-1 mb-2" aria-label={`${testimonial.rating} su 5`} style={{ color: '#f5b301' }}>
-                      {[1, 2, 3, 4, 5].map((n) => (
-                        <Icon key={n} name="star" size={16} style={{ fill: n <= testimonial.rating ? 'currentColor' : 'none', opacity: n <= testimonial.rating ? 1 : 0.3 }} />
-                      ))}
-                    </div>
-                  )}
-                  <p style={{ fontSize: 14.5, marginBottom: 16 }}>{testimonial.message}</p>
-                  <div className="d-flex align-items-center gap-3 mt-auto">
+                  <div className="d-flex align-items-center gap-3 mb-3">
                     {testimonial.avatar_url ? (
                       <img
                         src={testimonial.avatar_url}
@@ -51,18 +114,15 @@ export default function Testimonials({ testimonials, showCta = false }) {
                       )}
                     </div>
                   </div>
+                  {testimonial.rating > 0 && (
+                    <div className="mb-2">
+                      <Stars value={testimonial.rating} size={16} />
+                    </div>
+                  )}
+                  <p style={{ fontSize: 14.5, marginBottom: 0 }}>{testimonial.message}</p>
                 </div>
               </div>
             ))}
-          </div>
-        )}
-
-        {showCta && (
-          <div className="text-center mt-5">
-            <Link to="/testimonianze" className="btn-brand btn-outline">
-              Lascia una testimonianza
-              <Icon name="arrow" size={16} />
-            </Link>
           </div>
         )}
       </div>

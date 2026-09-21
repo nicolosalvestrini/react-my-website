@@ -1,4 +1,4 @@
-import Icon from './Icon';
+import ProfilePhoto from './ProfilePhoto';
 
 export default function About({ settings }) {
   const text = settings.about_text;
@@ -8,9 +8,7 @@ export default function About({ settings }) {
     <section className="section">
       <div className="container-narrow">
         <div className="card d-flex flex-column flex-md-row gap-4 p-4 p-md-5">
-          <div className="icon-box icon-box--purple" style={{ width: 56, height: 56, borderRadius: 16 }}>
-            <Icon name="briefcase" size={26} />
-          </div>
+          <ProfilePhoto settings={settings} size={160} />
           <div>
             <h2 className="section-title" style={{ fontSize: 24, marginBottom: 14 }}>
               Chi sono
