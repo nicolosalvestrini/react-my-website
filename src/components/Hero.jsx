@@ -17,6 +17,8 @@ export default function Hero({ settings, technologies = [] }) {
   const githubUrl = settings.github_url;
   const cvPath = settings.cv_file_path;
   const cvUrl = cvPath ? (cvPath.startsWith('http') ? cvPath : `${API_URL}/storage/${cvPath}`) : null;
+  const photoPath = settings.hero_photo;
+  const photoUrl = photoPath ? (photoPath.startsWith('http') ? photoPath : `${API_URL}/storage/${photoPath}`) : null;
   const floatingTechs = technologies.slice(0, 4);
 
   return (
@@ -71,14 +73,24 @@ export default function Hero({ settings, technologies = [] }) {
                 overflow: 'hidden',
               }}
             >
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'radial-gradient(circle at 30% 20%, rgba(40,112,255,0.25), transparent 55%), radial-gradient(circle at 80% 80%, rgba(171,138,255,0.25), transparent 55%)',
-                }}
-              />
-              <span style={{ fontSize: 96, fontWeight: 800, color: 'rgba(242,244,255,0.1)', position: 'relative' }}>NS</span>
+              {photoUrl ? (
+                <img
+                  src={photoUrl}
+                  alt="Foto profilo"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'relative' }}
+                />
+              ) : (
+                <>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'radial-gradient(circle at 30% 20%, rgba(40,112,255,0.25), transparent 55%), radial-gradient(circle at 80% 80%, rgba(171,138,255,0.25), transparent 55%)',
+                    }}
+                  />
+                  <span style={{ fontSize: 96, fontWeight: 800, color: 'rgba(242,244,255,0.1)', position: 'relative' }}>NS</span>
+                </>
+              )}
 
               {floatingTechs.map((tech, index) => (
                 <span

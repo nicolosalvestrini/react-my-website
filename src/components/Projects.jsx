@@ -78,7 +78,7 @@ export default function Projects({ projects, teaser = false, limit, viewAllHref 
                   <article className="card hover-lift h-100 d-flex flex-column overflow-hidden">
                     <div
                       style={{
-                        height: 150,
+                        height: 190,
                         position: 'relative',
                         overflow: 'hidden',
                         background: project.image_url
@@ -106,7 +106,7 @@ export default function Projects({ projects, teaser = false, limit, viewAllHref 
                           </div>
                         )
                       )}
-                      <span className="tag tag--purple" style={{ position: 'absolute', top: 14, left: 14 }}>
+                      <span className="tag tag--purple" style={{ position: 'absolute', top: 14, left: 14, background: 'rgba(4, 16, 36, 0.88)', backdropFilter: 'blur(4px)' }}>
                         {CATEGORY_LABELS[project.category] || project.category}
                       </span>
                     </div>
