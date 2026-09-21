@@ -19,6 +19,9 @@ export default function Hero({ settings, technologies = [] }) {
   const cvUrl = cvPath ? (cvPath.startsWith('http') ? cvPath : `${API_URL}/storage/${cvPath}`) : null;
   const photoPath = settings.hero_photo;
   const photoUrl = photoPath ? (photoPath.startsWith('http') ? photoPath : `${API_URL}/storage/${photoPath}`) : null;
+  const splitAt = title.indexOf('. ');
+  const firstSentence = splitAt > -1 ? title.slice(0, splitAt + 1) : title;
+  const rest = splitAt > -1 ? title.slice(splitAt + 2) : '';
   const floatingTechs = technologies.slice(0, 4);
 
   return (
@@ -26,10 +29,13 @@ export default function Hero({ settings, technologies = [] }) {
       <div className="container-narrow">
         <div className="row align-items-center gx-lg-5 gy-5">
           <div className="col-lg-6">
-            <h1 style={{ fontSize: 'clamp(34px, 5vw, 52px)', color: 'var(--text)' }}>{title}</h1>
-            <p style={{ marginTop: 22, fontSize: 18, maxWidth: 520 }}>{subtitle}</p>
+            <h1 className="fade-up" style={{ fontSize: 'clamp(36px, 5.2vw, 56px)', color: 'var(--text)' }}>
+              {firstSentence}
+              {rest && <> <span className="gradient-text">{rest}</span></>}
+            </h1>
+            <p className="fade-up fade-up--2" style={{ marginTop: 22, fontSize: 18, maxWidth: 520 }}>{subtitle}</p>
 
-            <div className="d-flex flex-wrap gap-3 mt-4">
+            <div className="d-flex flex-wrap gap-3 mt-4 fade-up fade-up--3">
               <Link to="/progetti" className="btn-brand btn-primary">
                 Scopri i miei progetti
                 <Icon name="arrow" size={18} />
@@ -57,27 +63,21 @@ export default function Hero({ settings, technologies = [] }) {
           </div>
 
           <div className="col-lg-6">
+            <div className="photo-frame fade-up fade-up--2" style={{ maxWidth: 420, margin: '0 auto' }}>
             <div
-              className="hover-lift"
+              className="photo-frame__inner"
               style={{
-                position: 'relative',
-                borderRadius: 24,
-                border: '1px solid var(--border)',
-                background: 'linear-gradient(160deg, var(--panel), var(--panel-2))',
-                aspectRatio: '4 / 4.2',
-                maxWidth: 420,
-                margin: '0 auto',
+                aspectRatio: '4 / 4.4',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                overflow: 'hidden',
               }}
             >
               {photoUrl ? (
                 <img
                   src={photoUrl}
                   alt="Foto profilo"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'relative' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 15%', position: 'relative' }}
                 />
               ) : (
                 <>
@@ -98,6 +98,7 @@ export default function Hero({ settings, technologies = [] }) {
                   style={{
                     position: 'absolute',
                     ...CHIP_POSITIONS[index],
+                    zIndex: 2,
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 8,
@@ -119,6 +120,7 @@ export default function Hero({ settings, technologies = [] }) {
                 className="icon-box icon-box--purple"
                 style={{
                   position: 'absolute',
+                  zIndex: 2,
                   bottom: 20,
                   right: 20,
                   width: 56,
@@ -129,6 +131,7 @@ export default function Hero({ settings, technologies = [] }) {
               >
                 <Icon name="code" size={26} />
               </span>
+            </div>
             </div>
           </div>
         </div>

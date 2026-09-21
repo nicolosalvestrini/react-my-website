@@ -112,8 +112,8 @@ export default function Projects({ projects, teaser = false, limit, viewAllHref 
                     </div>
                     <div className="p-4 d-flex flex-column flex-grow-1">
                       <h3 style={{ fontSize: 19, marginBottom: 8 }}>{project.title}</h3>
-                      <p style={{ fontSize: 14.5, flexGrow: 1 }}>{project.description}</p>
-                      <div className="d-flex flex-wrap gap-2 my-3">
+                      <p className="clamp-4" style={{ fontSize: 14.5 }}>{project.description}</p>
+                      <div className="d-flex flex-wrap gap-2 mt-auto pt-3 mb-3">
                         {project.technologies.map((tech) => (
                           <span key={tech.id} className="tag d-inline-flex align-items-center gap-1">
                             <TechIcon name={tech.name} size={13} />
@@ -121,7 +121,7 @@ export default function Projects({ projects, teaser = false, limit, viewAllHref 
                           </span>
                         ))}
                       </div>
-                      <div className="d-flex gap-3 mt-auto">
+                      <div className="d-flex gap-3">
                         {project.demo_url && (
                           <a href={project.demo_url} target="_blank" rel="noopener noreferrer" className="btn-brand btn-outline" style={{ padding: '8px 14px', fontSize: 13.5 }}>
                             Demo live

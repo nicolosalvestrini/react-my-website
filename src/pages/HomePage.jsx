@@ -12,13 +12,39 @@ const HERO_TECH_PRIORITY = ['React', 'Laravel', 'Node.js', 'MySQL', 'JavaScript'
 
 export default function HomePage() {
   const { data } = usePortfolioData();
-  const { settings, projects, services, technologies, testimonials } = data;
+  const { settings, projects, services, technologies, experiences, testimonials } = data;
+  const stats = [
+    { value: projects.length, label: projects.length === 1 ? 'Progetto realizzato' : 'Progetti realizzati' },
+    { value: technologies.length, label: 'Tecnologie utilizzate' },
+    { value: experiences.length, label: 'Esperienze e percorsi' },
+  ].filter((stat) => stat.value > 0);
   const aboutPreview = settings.about_text ? settings.about_text.split('\n').filter(Boolean)[0] : null;
   const heroTechs = HERO_TECH_PRIORITY.map((name) => technologies.find((t) => t.name === name)).filter(Boolean);
 
   return (
     <>
       <Hero settings={settings} technologies={heroTechs} />
+
+      {stats.length > 0 && (
+        <section style={{ paddingBottom: 8 }}>
+          <div className="container-narrow">
+            <div className="card">
+              <div className="row g-0">
+                {stats.map((stat, index) => (
+                  <div
+                    key={stat.label}
+                    className="col-4 stat"
+                    style={index > 0 ? { borderLeft: '1px solid var(--border)' } : undefined}
+                  >
+                    <div className="stat__value gradient-text">{stat.value}</div>
+                    <div className="stat__label">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {aboutPreview && (
         <section className="section--tight">
@@ -43,7 +69,7 @@ export default function HomePage() {
       <Projects projects={projects} teaser limit={3} viewAllHref="/progetti" />
       <Services services={services} limit={3} viewAllHref="/servizi" />
       <WhyMe />
-      <Testimonials testimonials={testimonials} showCta />
+      {testimonials.length > 0 && <Testimonials testimonials={testimonials} showCta />}
 
       <section className="section--tight">
         <div className="container-narrow">

@@ -13,7 +13,8 @@
   --radius-sm: 10px;
   --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
 
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter Variable', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', 'Inter Variable', system-ui, sans-serif;
   color-scheme: dark;
 }
 
@@ -39,6 +40,8 @@ a {
 }
 
 h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
   margin: 0;
   line-height: 1.25;
   font-weight: 700;
@@ -244,4 +247,81 @@ img {
 @keyframes skeleton-loading {
   0% { background-position: 100% 50%; }
   100% { background-position: 0 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(120deg, #6ea2ff 0%, var(--purple) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.fade-up {
+  animation: fade-up 0.7s ease both;
+}
+
+.fade-up--2 { animation-delay: 0.12s; }
+.fade-up--3 { animation-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+.photo-frame {
+  position: relative;
+  border-radius: 28px;
+  padding: 3px;
+  background: linear-gradient(140deg, #2870ff, var(--purple) 60%, #2870ff);
+  box-shadow: 0 30px 70px -20px rgba(40, 112, 255, 0.55), 0 0 90px -10px rgba(171, 138, 255, 0.35);
+}
+
+.photo-frame__inner {
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.photo-frame__inner img {
+  filter: saturate(0.95) contrast(1.04);
+}
+
+.photo-frame__inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(40, 112, 255, 0.28) 0%, rgba(171, 138, 255, 0.18) 55%, rgba(4, 16, 36, 0.55) 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.stat {
+  text-align: center;
+  padding: 22px 12px;
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat__label {
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
